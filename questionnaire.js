@@ -28,7 +28,7 @@ $(document).on("click", "[data-behavior~=tabulate-result]", function(event) {
   suffix = mode([].concat.apply([], answerSuffixes))
 
   // Display your warrior name
-  $("[data-role=animal-name]").html(prefix + "" + suffix)
+  $("[data-role=warrior-name]").html(capitalizeFirstLetter(prefix + "" + suffix))
   $(".zoom").fadeIn("fast")
 
   // Reset the form
@@ -52,4 +52,9 @@ function mode(arr) {
       arr.filter(v => v===a).length
     - arr.filter(v => v===b).length
   ).pop()
+}
+
+// Capitalize
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
