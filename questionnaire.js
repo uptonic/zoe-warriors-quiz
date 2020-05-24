@@ -23,13 +23,18 @@ $(document).on("click", "[data-behavior~=tabulate-result]", function(event) {
     answerSuffixes.push(this.value.split(","))
   })
 
+  console.log(answerPrefixes)
+
   // Get the most common prefix and suffix across your answers
-  prefix = mode([].concat.apply([], answerPrefixes))
-  suffix = mode([].concat.apply([], answerSuffixes))
+  prefix = mode([].concat.apply([], shuffle(answerPrefixes)))
+  suffix = mode([].concat.apply([], shuffle(answerSuffixes)))
 
   // Display your warrior name
   $("[data-role=warrior-name]").html(capitalizeFirstLetter(prefix + "" + suffix))
   $(".zoom").fadeIn("fast")
+
+  answerPrefixes = []
+  answerSuffixes = []
 
   // Reset the form
   $('form').get(0).reset()
@@ -57,4 +62,24 @@ function mode(arr) {
 // Capitalize
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Suffle the arrays
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
