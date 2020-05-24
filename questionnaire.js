@@ -23,8 +23,6 @@ $(document).on("click", "[data-behavior~=tabulate-result]", function(event) {
     answerSuffixes.push(this.value.split(","))
   })
 
-  console.log(answerPrefixes)
-
   // Get the most common prefix and suffix across your answers
   prefix = mode([].concat.apply([], shuffle(answerPrefixes)))
   suffix = mode([].concat.apply([], shuffle(answerSuffixes)))
